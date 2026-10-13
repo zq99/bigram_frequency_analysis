@@ -1,9 +1,68 @@
 # Bigram Frequency Analysis
 
-This code extracts all the Bigrams from a list of 9,000 of the most common words in English. 
+This project analyses where letter bigrams occur within a list of common
+English words.
 
-The idea is to count the frequency of each bigram at each position in a word and see the distribution relative to all appearances of that Bigram in the word list.
+A bigram is a sequence of two consecutive letters. For example, `hello`
+contains four bigrams:
 
-A Bigram is made up of two consecutive letters in a word.
+| Bigram | Position |
+|---|---:|
+| `he` | 1 |
+| `el` | 2 |
+| `ll` | 3 |
+| `lo` | 4 |
 
-For example, the word "hello" has 4 Bigrams: "he", "el", "ll", "lo".
+## Approach
+
+The program reads the 9,891 entries in `english_words.csv`. For every bigram,
+it records:
+
+- how often the bigram appears at each position within a word;
+- how often the bigram appears across all positions;
+- the percentage of its total appearances occurring at each position.
+
+For example, if a bigram appears 20 times in total and 5 of those appearances
+are at position 1, its position-1 percentage is 25%.
+
+Positions are one-based, so the first pair of letters in a word is at position
+1.
+
+## Running the analysis
+
+Install the dependency:
+
+```bash
+pip install -r requirements.txt
+```
+
+Run the program:
+
+```bash
+python bigram_report.py
+```
+
+The analysis is written to `results.csv`.
+
+## Output
+
+The output contains the following columns:
+
+| Column | Description |
+|---|---|
+| `text` | The two-letter bigram. |
+| `position` | Its one-based position within a word. |
+| `frequency` | The number of appearances at that position. |
+| `total` | The number of appearances across all positions. |
+| `percentage` | The percentage of all appearances occurring at that position. |
+
+## Interpretation
+
+Each word in the supplied list is counted equally. The results therefore
+describe the composition of this word list; they are not estimates of bigram
+frequency in ordinary English prose, where frequently used words would receive
+more weight.
+
+> This was originally written as an early Python learning project. It has since
+> received minor maintenance, type annotations, and bug fixes while retaining
+> its original design.
